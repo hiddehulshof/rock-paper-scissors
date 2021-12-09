@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- displays site properly based on user's device -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+</head>
+<body>
+<main id="app">
+    <section class="score__section">
+        <div class="score__section_inner">
+            <div class="score__title">
+                <h1>
+                    ROCK <br>
+                    PAPER <br>
+                    SCISSORS
+                </h1>
+            </div>
+            <div class="score__output">
+                <div class="score__output_inner">
+                    <div class="score__title">
+                        SCORE
+                    </div>
+                    {{ score }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="play__section" v-if="!myWeapon">
+        <div class="play__content">
+            <div class="play__section_inner">
+                <div class="play__triangle"></div>
+                <div class="play__box">
+                    <div class="play__buttons">
+                        <div class="play__button paper" @click="choose('paper')"></div>
+                        <div class="play__button scissors" @click="choose('scissors')"></div>
+                    </div>
+                    <div class="play__buttons_centre">
+                        <div class="play__button rock" @click="choose('rock')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="play__section" v-if="myWeapon">
+        <div :class="content">
+            <div class="play__section_inner">
+                <div class="play__box">
+                    <div class="play__results">
+                        <div class="icon__box">
+                            <div class="picked__text">You picked</div>
+                            <div class="centre__icon" :class="wonClass">
+                                <div class="play__button paper" v-if="myWeapon === 'paper'"></div>
+                                <div class="play__button scissors" v-if="myWeapon === 'scissors'"></div>
+                                <div class="play__button rock" v-if="myWeapon === 'rock'"></div>
+                            </div>
+                        </div>
+                        <div v-if="!waiting" class="waiting__item">
+                            <div class="waiting__item_inner">
+                                <div class="reset__text">
+                                    {{ formatText(result) }}
+                                </div>
+                                <div class="result__buttons_centre">
+                                    <button class="reset__button" :class="resultClass" @click="reset()">PLAY AGAIN</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icon__box">
+                            <div class="picked__text">The house picked</div>
+                            <div class="centre__icon" :class="lostClass">
+                                <div class="play__button paper" v-if="AIWeapon === 'paper' && !waiting"></div>
+                                <div class="play__button scissors" v-if="AIWeapon === 'scissors' && !waiting"></div>
+                                <div class="play__button rock" v-if="AIWeapon === 'rock' && !waiting"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="rules__container">
+        <button class="rules__button" :class="resultClass" @click="showRulesModal()">RULES</button>
+    </div>
+    <div v-if="showRules" class="modal__container">
+        <div  class="rules__modal">
+            <div class="rule__title">
+                <h1>RULES</h1>
+                <div @click="closeRules()" class="close__button desktop">
+                    x
+                </div>
+            </div>
+            <div class="rule__image">
+                <img src="images/image-rules.svg">
+            </div>
+            <div @click="closeRules()" class="close__button mobile">
+                x
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                showRules: false,
+                waiting: true,
+                winner: null,
+                score: 0,
+                weapons: ['rock', 'paper', 'scissors'],
+                myWeapon: '',
+                AIWeapon: '',
+                result: ''
+            }
+        },
+        computed: {
+            content() {
+                if (this.waiting) {
+                    return 'waiting__content'
+                } else {
+                    return 'result__content'
+                }
+            },
+            resultClass() {
+                if (this.result === 'lost') {
+                    return 'red'
+                }
+            },
+            wonClass() {
+                if (this.result === 'win') {
+                    return 'highlight'
+                }
+            },
+            lostClass() {
+                if (this.result === 'lost') {
+                    return 'highlight'
+                }
+            }
+        },
+        methods: {
+            choose(weapon) {
+                console.log(weapon)
+                this.setWeapon(weapon)
+                this.setAIWeapon()
+                setTimeout(() => {
+                    this.decideVictory()
+                }, 1000);
+            },
+            setWeapon(weapon) {
+                this.myWeapon = weapon
+            },
+            setAIWeapon() {
+                this.AIWeapon = this.weapons[Math.floor(Math.random() * 3)]
+            },
+            showRulesModal() {
+                this.showRules = true
+            },
+            closeRules() {
+                this.showRules = false
+            },
+            reset() {
+                this.result = ''
+                this.myWeapon = ''
+                this.AIWeapon = ''
+                this.waiting = true
+            },
+            decideVictory() {
+                if (this.AIWeapon === this.myWeapon) {
+                    this.result = 'draw'
+                } else {
+                    if (this.myWeapon === 'paper') {
+                        if (this.AIWeapon === 'rock') {
+                            this.result = 'win'
+                        } else {
+                            this.result = 'lost'
+                        }
+                    }
+                    if (this.myWeapon === 'rock') {
+                        if (this.AIWeapon === 'scissors') {
+                            this.result = 'win'
+                        } else {
+                            this.result = 'lost'
+                        }
+                    }
+                    if (this.myWeapon === 'scissors') {
+                        if (this.AIWeapon === 'paper') {
+                            this.result = 'win'
+                        } else {
+                            this.result = 'lost'
+                        }
+                    }
+                }
+                if (this.result === 'win') {
+                    this.score++
+                }
+                this.waiting = false
+
+            },
+            formatText(text) {
+                if (text === 'win') {
+                    return 'YOU WIN'
+                }
+                if (text === 'draw') {
+                    return 'NOBODY WON'
+                } else {
+                    return 'YOU LOSE'
+
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
