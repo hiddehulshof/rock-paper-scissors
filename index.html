@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- displays site properly based on user's device -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +34,7 @@
             </div>
         </div>
     </section>
-    <section class="play__section" v-if="!myWeapon">
+    <div class="play__section" v-if="!myWeapon">
         <div class="play__content">
             <div class="play__section_inner">
                 <div class="play__triangle"></div>
@@ -50,8 +49,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="play__section" v-if="myWeapon">
+    </div>
+    <div class="play__section" v-if="myWeapon">
         <div :class="content">
             <div class="play__section_inner">
                 <div class="play__box">
@@ -86,7 +85,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
     <div class="rules__container">
         <button class="rules__button" :class="resultClass" @click="showRulesModal()">RULES</button>
     </div>
