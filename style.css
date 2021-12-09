@@ -135,7 +135,10 @@ body {
 .mobile {
     display: none;
 }
-
+.rule__title {
+    display: flex;
+    justify-content: space-around;
+}
 @media only screen and (max-width: 768px) {
     .desktop {
         display: none;
@@ -361,4 +364,8 @@ body {
 .close__button {
     font-size: 32px;
     color: rgba(0, 0, 0, 0.15);
+}
+
+.close__button:hover {
+    cursor: pointer;
 }
