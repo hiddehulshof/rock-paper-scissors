@@ -55,11 +55,11 @@ body {
     padding: 0.5rem 2rem;
 }
 
-.play__triangle {
+.play__pentagon {
     width: 300px;
-    height: 300px;
+    height: 475px;
     margin: 100px auto;
-    background-image: url("images/bg-triangle.svg");
+    background-image: url("assets/bg-pentagon.svg");
     background-repeat: no-repeat;
     background-position: center;
     position: relative;
@@ -72,7 +72,7 @@ body {
 }
 
 .play__content {
-    width: 475px;
+    width: 600px;
     height: 600px;
 }
 
@@ -91,8 +91,8 @@ body {
 }
 
 .play__buttons {
-    padding-bottom: 140px;
     display: flex;
+    margin-bottom: 5rem;
     justify-content: space-between;
 }
 
@@ -201,7 +201,7 @@ body {
 
 .play__buttons_centre {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .play__button {
@@ -224,7 +224,7 @@ body {
 }
 
 .play__button.paper {
-    background-image: url("images/icon-paper.svg");
+    background-image: url("assets/icon-paper.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(230, 89%, 62%),
@@ -233,7 +233,7 @@ body {
 
 .highlight .play__button.paper {
     z-index: -1;
-    background-image: url("images/icon-paper.svg");
+    background-image: url("assets/icon-paper.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(230, 89%, 62%),
@@ -244,7 +244,7 @@ body {
 }
 
 .play__button.scissors {
-    background-image: url("images/icon-scissors.svg");
+    background-image: url("assets/icon-scissors.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(40, 84%, 53%),
@@ -252,7 +252,7 @@ body {
 }
 
 .highlight .play__button.scissors {
-    background-image: url("images/icon-scissors.svg");
+    background-image: url("assets/icon-scissors.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(40, 84%, 53%),
@@ -263,19 +263,57 @@ body {
 }
 
 .play__button.rock {
-    background-image: url("images/icon-rock.svg");
+    background-image: url("assets/icon-rock.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(349, 71%, 52%),
     0 0.75em 0 1.65em hsla(349, 71%, 52%, 0.6);
 }
 
+.play__button.spock {
+    background-image: url("assets/icon-spock.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 1.75em hsl(189, 58%, 57%),
+    0 0.75em 0 1.65em hsl(189, 59%, 53%);
+}
+
+.play__button.lizard {
+    background-image: url("assets/icon-lizard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 1.75em hsl(261, 72%, 63%),
+    0 0.75em 0 1.65em hsl(261, 73%, 60%);
+}
+
 .highlight .play__button.rock {
-    background-image: url("images/icon-rock.svg");
+    background-image: url("assets/icon-rock.svg");
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0 0 0 1.75em hsl(349, 71%, 52%),
     0 0.75em 0 1.65em hsla(349, 71%, 52%, 0.6),
+    0 0 0 5em hsla(0, 9%, 79%, 0.1),
+    0 0 0 7.5em hsla(0, 9%, 79%, 0.05),
+    0 0 0 10em hsla(0, 9%, 79%, 0.01);
+}
+
+.highlight .play__button.lizard {
+    background-image: url("assets/icon-lizard.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 1.75em hsl(261, 72%, 63%),
+    0 0.75em 0 1.65em hsl(261, 73%, 60%),
+    0 0 0 5em hsla(0, 9%, 79%, 0.1),
+    0 0 0 7.5em hsla(0, 9%, 79%, 0.05),
+    0 0 0 10em hsla(0, 9%, 79%, 0.01);
+}
+
+.highlight .play__button.spock {
+    background-image: url("assets/icon-spock.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 0 1.75em hsl(189, 58%, 57%),
+    0 0.75em 0 1.65em hsl(189, 59%, 53%),
     0 0 0 5em hsla(0, 9%, 79%, 0.1),
     0 0 0 7.5em hsla(0, 9%, 79%, 0.05),
     0 0 0 10em hsla(0, 9%, 79%, 0.01);
@@ -366,4 +404,8 @@ body {
 
 .close__button:hover {
     cursor: pointer;
+}
+
+.d-none {
+    display: none;
 }
